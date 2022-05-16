@@ -1,0 +1,30 @@
+{
+	"name": "sharthat-template",
+	"version": "0.0.1",
+	"description": "A starter template using Svelte, Hardhat and more",
+	"main": "index.js",
+	"scripts": {
+		"dev": "pnpm dev --filter sharthat-frontend",
+		"build": "pnpm build --filter sharthat-frontend",
+		"preview": "pnpm preview --filter sharthat-frontend",
+		"chain": "pnpm chain --filter sharthat-contracts",
+		"deploy": "pnpm deploy --filter sharthat-contracts",
+		"deploy:network": "pnpm deploy:network --filter sharthat-contracts",
+		"verify:network": "pnpm verify:network --filter sharthat-contracts",
+		"compile": "pnpm compile --filter sharthat-contracts",
+		"export": "pnpm export --filter sharthat-contracts",
+		"test": "pnpm test --filter sharthat-contracts",
+		"coverage": "pnpm coverage --filter sharthat-contracts",
+		"dodoc": "pnpm dodoc --filter sharthat-contracts"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/0xD006F00D/sharthat-template.git"
+	},
+	"author": "0xD006F00D",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/0xD006F00D/sharthat-template/issues"
+	},
+	"homepage": "https://github.com/0xD006F00D/sharthat-template#readme"
+}

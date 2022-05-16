@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	@apply block h-full w-full min-w-[320px] bg-neutral-900 font-mono text-base text-white;
+}
+
+h1 {
+	@apply text-2xl;
+}
+
+h2 {
+	@apply text-lg;
+}
+
+h2 {
+	@apply text-lg;
+}
+
+h3 {
+	@apply font-bold;
+}
+
+a {
+	@apply border-b-2 border-transparent text-neutral-400 transition-colors;
+}
+
+a:hover,
+a.active {
+	@apply border-b-2 border-neutral-300 text-neutral-300;
+}
+
+a.button,
+button {
+	@apply inline-block min-w-0 truncate rounded border-2  px-4 py-1 transition-colors;
+	@apply border-neutral-700 bg-neutral-800 text-white;
+}
+
+a.button:hover,
+button:hover:not(:disabled) {
+	@apply border-neutral-300 bg-neutral-200 text-neutral-800;
+}
+
+a.button.danger:hover,
+button.danger:hover:not(:disabled) {
+	@apply border-red-800 bg-red-600 text-white;
+}
+
+a.button.success:hover,
+button.success:hover:not(:disabled) {
+	@apply border-green-800 bg-green-600 text-white;
+}
+
+a.button.info:hover,
+button.info:hover:not(:disabled) {
+	@apply border-blue-800 bg-blue-600 text-white;
+}
+
+button:disabled,
+input:disabled,
+select:disabled {
+	@apply opacity-50;
+}
+
+.disabled {
+	@apply pointer-events-none opacity-50;
+}
+
+input {
+	@apply rounded border-2 border-neutral-700 bg-neutral-800 px-2 py-1 transition-colors;
+}
+
+input:focus {
+	@apply border-neutral-300 outline-none;
+}
+
+input[type='number'] {
+	@apply m-0;
+	appearance: textfield;
+}
+
+textarea {
+	@apply rounded border-2 border-neutral-700 bg-neutral-800 px-2 py-1 transition-colors;
+}
+
+textarea:focus {
+	@apply border-neutral-300 outline-none;
+}
+
+select {
+	@apply appearance-none rounded border-2 border-neutral-700 bg-neutral-800 py-1 pl-2 pr-6;
+}
+
+select:focus {
+	@apply border-neutral-300 outline-none;
+}
+
+.select {
+	@apply relative;
+}
+
+.select:after,
+.arrow-down:after,
+.arrow-up:after {
+	@apply pointer-events-none absolute right-2 h-0 w-0;
+	content: '';
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+}
+
+.select:after,
+.arrow-down:after {
+	@apply top-1/2 -mt-[2px];
+	border-top: 5px solid #aaa;
+}
+
+.arrow-up:after {
+	@apply bottom-1/2 -mb-[2px];
+	border-bottom: 5px solid #aaa;
+}
+
+.pill-sm {
+	@apply m-1 rounded-full px-2 py-1 align-middle text-[0.6rem] leading-none;
+}
+
+.pill {
+	@apply inline-flex items-center justify-center rounded px-2 py-1;
+}
+
+.icon-link,
+.icon-link:hover {
+	@apply cursor-pointer select-none border-0 text-transparent opacity-20 transition-opacity;
+	text-shadow: 0 0 0 rgb(231, 229, 228);
+}
+
+.icon-link:hover {
+	@apply opacity-100;
+}

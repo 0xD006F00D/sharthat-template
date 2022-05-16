@@ -1,0 +1,35 @@
+{
+	"name": "sharthat-frontend",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "svelte-kit dev",
+		"build": "svelte-kit build",
+		"package": "svelte-kit package",
+		"preview": "svelte-kit preview",
+		"prepare": "svelte-kit sync",
+		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-static": "next",
+		"@sveltejs/kit": "next",
+		"autoprefixer": "^10.4.7",
+		"cssnano": "^5.1.7",
+		"dotenv": "^16.0.1",
+		"eslint": "^8.15.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"postcss": "^8.4.13",
+		"prettier": "^2.6.2",
+		"prettier-plugin-tailwindcss": "^0.1.10",
+		"svelte": "^3.48.0",
+		"svelte-preprocess": "^4.10.6",
+		"tailwindcss": "^3.0.24"
+	},
+	"type": "module",
+	"dependencies": {
+		"ethers": "^5.6.6",
+		"svelte-ethers-store": "^2.3.1"
+	}
+}
