@@ -15,6 +15,6 @@
 	}
 
 	.box {
-		@apply m-4 w-[95%] max-w-sm overflow-hidden border-4 border-neutral-800 p-8;
+		@apply mx-4 my-8 w-[95%] max-w-sm overflow-hidden border-4 border-neutral-800 p-8;
 	}
 </style>

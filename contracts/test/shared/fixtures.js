@@ -1,8 +1,8 @@
 const {ethers} = require('hardhat');
 const {deployContract} = require('ethereum-waffle');
 
-const MoneyABI = require('../../artifacts/contracts/Money.sol/Money.json');
-const TokenVendorABI = require('../../artifacts/contracts/TokenVendor.sol/TokenVendor.json');
+const MoneyABI = require('../../artifacts/src/Money.sol/Money.json');
+const TokenVendorABI = require('../../artifacts/src/TokenVendor.sol/TokenVendor.json');
 
 const deployOverrides = {
 	gasLimit: 30000000

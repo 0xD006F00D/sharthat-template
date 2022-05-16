@@ -28,6 +28,6 @@
 
 <style lang="postcss">
 	.contracts {
-		@apply m-auto my-16 max-w-2xl break-words px-4 text-center;
+		@apply m-auto max-w-2xl break-words py-16 px-4 text-center;
 	}
 </style>

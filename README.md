@@ -21,7 +21,11 @@ Prerequisites: [Node (v16 LTS)](https://nodejs.org/en/download/), [pnpm](https:/
 
 Clone/fork:
 ```bash
-git clone https://github.com/0xD006F00D/sharthat-template.git my-project
+git clone https://github.com/0xD006F00D/sharthat-template.git shart-project
+# or
+git clone git@github.com:0xD006F00D/sharthat-template.git shart-project
+# navigate to dir for following commands
+cd shart-project
 ```
 
 Install dependencies:
@@ -112,12 +116,12 @@ pnpm deploy:network rinkeby
 
 Building the frontend:
 ```bash
-npm run build
+pnpm run build
 ```
 
 Preview the production build:
 ```bash
-npm run preview
+pnpm run preview
 ```
 
 > By default [adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) is used to pre-render the site as a collection of static files, allowing deployment to ipfs, surge, fleek, etc.
@@ -168,10 +172,10 @@ Address
 ```JavaScript
 import Address from '$lib/generic/address.svelte';
 
-<Identicon address={$signerAddress} />
+<Address address={$signerAddress} />
 
 // Custom tooltip and click function
-<Identicon address={$signerAddress} tooltipText="Add" clickAction={addToContacts} />
+<Address address={$signerAddress} tooltipText="Add" clickAction={addToContacts} />
 
 // Disable tooltip and clickAction
 <Address address={$signerAddress} disabled />
@@ -180,7 +184,7 @@ import Address from '$lib/generic/address.svelte';
 
 Address Input
 ```JavaScript
-import Address from '$lib/generic/address.svelte';
+import Identicon from '$lib/generic/identicon.svelte';
 
 <Identicon input address={address}>
     <input placeholder="Address" bind:value={address} />
@@ -206,7 +210,7 @@ import Popup from '$lib/generic/panel.svelte';
 let showMessage = false;
 
 <Popup bind:show={showMessage}>
-	<h1>Message</h1>
+    <h1>Message</h1>
     <button id="transferCancelButton" on:click={() => (showMessage = false)}>
         Close
     </button>
@@ -231,7 +235,8 @@ import { NativeBalance, TokenBalance } from '$lib/stores/balances';
 
 // use .display for eth formatted string with two decimal places
 // use .value to get the actual big number value in wei
-$: balanceStatus = $NativeBalance.display + $NativeBalance.symbol + ' / ' + $TokenBalance.display + $TokenBalance.symbol;
+const nativeDisplay = $NativeBalance.display + $NativeBalance.symbol;
+const tokenAmount = $TokenBalance.value;
 ```
 
 
