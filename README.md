@@ -6,7 +6,7 @@ A starter template using [Svelte](https://svelte.dev/), [SvelteKit](https://kit.
 
 ## Features
 
-* [Debug UI](https://sharthat.on.fleek.co/debug/)
+* [Contract Debug UI](https://sharthat.on.fleek.co/debug/)
 * Transaction Notifications
 * Ready to use and easily extensible generic components and stores (e.g. toasts, tooltips, balances, ...)
 * Out of the box support for [EIP-712 Permits](https://eips.ethereum.org/EIPS/eip-2612)

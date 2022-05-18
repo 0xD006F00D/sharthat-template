@@ -1,6 +1,6 @@
 {
 	"name": "sharthat-template",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "A starter template using Svelte, Hardhat and more",
 	"main": "index.js",
 	"scripts": {

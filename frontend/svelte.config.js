@@ -8,7 +8,12 @@ const config = {
 			default: true
 		},
 		trailingSlash: 'always',
-		adapter: adapter()
+		adapter: adapter(),
+		vite: {
+			define: {
+				__version__: JSON.stringify(process.env.npm_package_version)
+			}
+		}
 	},
 	preprocess: preprocess({
 		postcss: true

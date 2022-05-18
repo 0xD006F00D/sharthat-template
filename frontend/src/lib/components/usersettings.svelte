@@ -8,6 +8,8 @@
 	import Popup from '$lib/generic/popup.svelte';
 	import Panel from '$lib/generic/panel.svelte';
 
+	const APP_VERSION = __version__;
+
 	let values;
 	let isSaving = false;
 	let customNetworkName = '';
@@ -55,7 +57,8 @@
 	<div class="space-y-4">
 		<div class="panel-container">
 			<Panel name="Dev">
-				<div class="setting">
+				<div class="setting relative">
+					<div class="absolute right-0 text-right text-xs opacity-50">{APP_VERSION}</div>
 					<span class="title">Debug</span>
 					<input id="settingDebugCheckBox" type="checkbox" bind:checked={values.debug} />
 				</div>
