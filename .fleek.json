@@ -1,8 +1,8 @@
 {
 	"build": {
 		"image": "fleek/svelte:node-16",
-		"command": "npm install && npm run build",
-		"publicDir": "build",
-		"baseDir": "frontend"
+		"command": "npm install -g pnpm && pnpm --filter=./frontend install && pnpm run build",
+		"publicDir": "frontend/build",
+		"baseDir": ""
 	}
 }
