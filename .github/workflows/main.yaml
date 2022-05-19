@@ -1,0 +1,102 @@
+# This is a basic workflow to help you get started with Actions
+
+name: ContractsCI
+
+# Controls when the workflow will run
+on:
+    # Triggers the workflow on push into the contracts package
+    push:
+        paths:
+            - 'contracts/**'
+        branches: [main, staging, dev]
+    pull_request:
+        paths:
+            - 'contracts/**'
+        branches: [main, staging, dev]
+
+    # Allows you to run this workflow manually from the Actions tab for default branch
+    workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+    # This workflow contains a single job called "build"
+    build:
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            security-events: write
+
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            # Installing Node & pnpm
+            - name: Use Node.js 16.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 16.x
+
+            # Install pnpm and dependencies (ignoring the frontend)
+            - name: Install dependencies
+              uses: pnpm/action-setup@v2.2.1
+              with:
+                  version: 6
+                  run_install: |
+                      - recursive: false
+                        args: [--filter=./contracts]
+
+            # Compile and archive abi
+            - name: Compile contracts
+              run: pnpm run compile
+
+            - name: Archive ABI
+              uses: actions/upload-artifact@v3
+              with:
+                  name: artifacts_abi
+                  path: |
+                      contracts/artifacts
+
+            # Run the tests
+            - name: Test & log coverage
+              run: pnpm run coverage
+
+            # Setup Link repo at http://codecov.io/ if failing
+            - name: Upload coverage results
+              uses: codecov/codecov-action@v3
+              with:
+                  directory: contracts/coverage
+                  name: codecov-umbrella
+                  fail_ci_if_error: true
+                  flags: unittests
+
+            # Manually Compile for slither
+            - name: Compile contracts
+              run: pnpm run compile
+
+            # Fetch build solc version from the hardhat compile
+            - name: Fetch build info
+              id: build-info
+              run: |
+                  solcVersion=$(jq '.solcVersion' ./contracts/artifacts/build-info/*.json)
+                  echo "::set-output name=solc-version::$solcVersion"
+                  echo "Using Solidity Version $solcVersion"
+
+            # Run security check
+            - name: Run Slither
+              uses: crytic/slither-action@v0.1.1
+              continue-on-error: true
+              id: slither
+              with:
+                  ignore-compile: true
+                  solc-version: ${{steps.build-info.solc-version}}
+                  target: contracts
+                  sarif: contracts/results.sarif
+
+            - name: Upload Slither results
+              uses: github/codeql-action/upload-sarif@v2
+              with:
+                  category: slither
+                  sarif_file: ${{ steps.slither.outputs.sarif }}

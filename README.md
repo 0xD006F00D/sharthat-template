@@ -12,8 +12,7 @@ A starter template using [Svelte](https://svelte.dev/), [SvelteKit](https://kit.
 * Out of the box support for [EIP-712 Permits](https://eips.ethereum.org/EIPS/eip-2612)
 * Advanced Waffle testing examples using Fixtures
 * Support for multiple EVM chains
-
-
+* Github Workflow for Contracts (incl. test+coverage & slither analysis)
 
 # Quick Start
 
