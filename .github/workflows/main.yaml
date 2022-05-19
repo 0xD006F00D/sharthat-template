@@ -93,6 +93,7 @@ jobs:
                   ignore-compile: true
                   solc-version: ${{steps.build-info.solc-version}}
                   target: contracts
+                  slither-config: contracts/slither.config.json
                   sarif: contracts/results.sarif
 
             - name: Upload Slither results

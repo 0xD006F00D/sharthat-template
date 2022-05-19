@@ -1,0 +1,4 @@
+{
+	"detectors_to_exclude": "variable-scope,shadowing-local",
+	"exclude_informational": true
+}

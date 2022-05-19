@@ -36,6 +36,7 @@ contract TokenVendor is ITokenVendor, Ownable {
 		emit Sold(msg.sender, tokenAmount);
 		money.burn(msg.sender, tokenAmount);
 
+		// slither-disable-next-line arbitrary-send
 		(bool sent, ) = msg.sender.call{value: amountOfEth}('');
 		require(sent, 'Failed to send Ether');
 	}
@@ -50,6 +51,7 @@ contract TokenVendor is ITokenVendor, Ownable {
 		bytes32 s
 	) external override {
 		money.permit(msg.sender, address(this), tokenAmount, deadline, v, r, s);
+		// slither-disable-next-line reentrancy-events
 		sell(tokenAmount);
 	}
 

@@ -14,6 +14,7 @@ contract Money is ERC20Permit, Ownable, IMoney {
 	/// @notice Sets the contract that is able to print/burn money
 	/// @dev Only executable by contract owner
 	/// @param _printer The new printer/burner
+	// slither-disable-next-line missing-zero-check
 	function setPrinter(address _printer) external onlyOwner {
 		emit PrinterChange(_printer);
 		printer = _printer;
