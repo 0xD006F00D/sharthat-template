@@ -13,7 +13,8 @@
 	const routes = [
 		{ name: 'Index', route: '/' },
 		{ name: 'About', route: '/about/' },
-		{ name: 'Debug', route: '/debug/' }
+		{ name: 'Debug', route: '/debug/' },
+		{ name: 'Test', route: '/test/' }
 	];
 
 	// Bug: Svelte will reload stores again on first navigation
