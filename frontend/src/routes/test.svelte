@@ -18,10 +18,17 @@
 	function execute(name, value) {
 		console.log('execute', name, value);
 	}
+
+	function logConnection() {
+		console.log('ReadEvmStores.Connected', ReadEvmStores.$connected);
+		console.log('ProviderConnected', $ProviderConnected);
+	}
 </script>
 
 <div class="content">
 	<h1>Open Console</h1>
+
+	<button on:click={() => logConnection()}>logConnection</button>
 </div>
 
 <style lang="postcss">
