@@ -7,6 +7,8 @@ import { Settings } from '$lib/stores/settings';
 //Evm store connected to read-only providers
 export const ReadEvmStores = makeEvmStores('read');
 
+export const ReadConnected = ReadEvmStores.connected;
+
 export const ProviderConnected = derived(
 	[ReadEvmStores.connected, ReadEvmStores.chainId, ReadEvmStores.contracts],
 	async ([$connected, $chainId, $contracts], set) => {

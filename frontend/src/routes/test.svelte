@@ -1,5 +1,6 @@
 <script>
 	import { ProviderConnected, ReadEvmStores } from '$lib/stores';
+	import { ReadConnected } from '$lib/stores/evm';
 	import { connected } from 'svelte-ethers-store';
 
 	// Initially undefined, refreshes with actual value on connect
@@ -14,6 +15,10 @@
 	// Initially default value, refreshes with actual value on connect
 	$: console.log('ProviderConnected', $ProviderConnected);
 	$: if ($ProviderConnected) execute('ProviderConnected', $ProviderConnected);
+
+	// Storing the store in a another var seems to work too
+	$: console.log('$ReadConnected', $ReadConnected);
+	$: if ($ReadConnected) execute('$ReadConnected', $ReadConnected);
 
 	function execute(name, value) {
 		console.log('execute', name, value);
