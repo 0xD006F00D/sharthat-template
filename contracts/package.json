@@ -14,7 +14,7 @@
 		"coverage": "hardhat coverage --network hardhat"
 	},
 	"devDependencies": {
-		"@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
+		"@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@0.3.0-beta.13",
 		"@nomiclabs/hardhat-etherscan": "^3.0.3",
 		"@nomiclabs/hardhat-waffle": "^2.0.3",
 		"@openzeppelin/contracts": "^4.6.0",

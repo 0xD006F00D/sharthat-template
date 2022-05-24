@@ -11,7 +11,7 @@
 		<div
 			class="toast toast-{notification.type} "
 			animate:flip={{ delay: 0, duration: 300 }}
-			in:fly|local={{ y: 30 }}
+			in:fly|local={{ y: 30, delay: 150 }}
 			out:fly|local={{ y: 30 }}>
 			<div class="content">{notification.message}</div>
 			{#if notification.type == 'wait'}

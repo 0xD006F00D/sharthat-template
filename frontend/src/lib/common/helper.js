@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 
-import { ReadEvmStores, Notifier } from '$lib/stores';
+import { ReadEvmStores } from '$lib/stores/evm';
+import { Notifier } from '$lib/stores';
 import { Transacting } from '$lib/stores/transactor';
 
 export function isEnsAddress(address) {

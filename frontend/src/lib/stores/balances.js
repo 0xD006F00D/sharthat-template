@@ -1,11 +1,9 @@
 import { derived, writable } from 'svelte/store';
-import { defaultEvmStores, connected, signer, chainId, chainData } from 'svelte-ethers-store';
-
-import { getDisplayValue } from '$lib/common/helper';
-import { ReadEvmStores } from '$lib/stores';
-import { ProviderConnected } from './evm';
-import { signerAddress } from 'svelte-ethers-store';
 import { ethers } from 'ethers';
+import { connected, signer, chainId, chainData, signerAddress } from 'svelte-ethers-store';
+
+import { ReadEvmStores } from '$lib/stores/evm';
+import { getDisplayValue } from '$lib/common/helper';
 
 function createNativeBalanceStore() {
 	const refreshStore = writable(true);
@@ -59,9 +57,9 @@ function createTokenBalanceStore() {
 	const defaultSymbol = '';
 
 	const symbolStore = derived(
-		[ProviderConnected],
-		async ([$ProviderConnected], set) => {
-			if ($ProviderConnected) {
+		[ReadEvmStores.$connected],
+		async ([$ReadConnected], set) => {
+			if ($ReadConnected) {
 				let value = await ReadEvmStores.$contracts.Money.symbol();
 				set(value);
 			}

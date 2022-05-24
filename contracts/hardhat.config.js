@@ -34,7 +34,10 @@ module.exports = {
 	namedAccounts: {
 		deployer: {
 			default: 'privatekey://' + process.env.DEPLOYER_PRIVATE_KEY,
-			31337: process.env.TEST_WALLET_ADDRESS || 0
+			31337: 0
+		},
+		tester: {
+			default: process.env.TEST_WALLET_ADDRESS
 		}
 	},
 	dodoc: {

@@ -14,7 +14,8 @@
 		ReadEvmStores,
 		getAvailableNetworks,
 		chainSupported,
-		loadAppContracts
+		loadAppContracts,
+		ReadContracts
 	} from '$lib/stores/evm';
 
 	import Address from '$lib/generic/address.svelte';
@@ -43,7 +44,7 @@
 		if (
 			window.ethereum &&
 			window.ethereum.isConnected() &&
-			chainSupported(window.ethereum, $Settings)
+			chainSupported(window.ethereum.chainId, $Settings)
 		) {
 			chainId = window.ethereum.chainId;
 		}
@@ -74,8 +75,9 @@
 		selectedNetwork = availableNetworks.find((n) => n.chainId == selectedChain);
 
 		try {
-			await ReadEvmStores.setProvider(selectedNetwork.rpcUrl);
+			await ReadEvmStores.setProvider(selectedNetwork.rpcUrl, null);
 		} catch (e) {
+			console.log(e);
 			Notifier.danger('RPC connection failed, check your settings');
 		}
 
@@ -247,7 +249,7 @@
 					on:click|stopPropagation={() =>
 						addTokenToWallet(
 							selectedChain,
-							ReadEvmStores.$contracts.Money.address,
+							$ReadContracts.Money.address,
 							$TokenBalance.symbol
 						)}>
 					Add $MNY

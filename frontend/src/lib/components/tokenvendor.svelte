@@ -2,15 +2,10 @@
 	import { ethers } from 'ethers';
 	import { connected, contracts, signerAddress } from 'svelte-ethers-store';
 
+	import { ReadConnected, ReadContracts, ReadProvider } from '$lib/stores/evm';
+	import { NativeBalance, Notifier, TokenBalance } from '$lib/stores';
 	import { Transacting, tx } from '$lib/stores/transactor';
 	import { Signature } from '$lib/common/signature';
-	import {
-		NativeBalance,
-		Notifier,
-		ProviderConnected,
-		ReadEvmStores,
-		TokenBalance
-	} from '$lib/stores';
 
 	import Divider from '$lib/generic/divider.svelte';
 
@@ -23,11 +18,11 @@
 	let moniesPerEth = 0;
 	let vendorOwner;
 
-	$: if ($ProviderConnected) initialize();
+	$: if ($ReadConnected) initialize();
 
 	async function initialize() {
-		moniesPerEth = await ReadEvmStores.$contracts.TokenVendor.moniesPerEth();
-		vendorOwner = await ReadEvmStores.$contracts.TokenVendor.owner();
+		moniesPerEth = await $ReadContracts.TokenVendor.moniesPerEth();
+		vendorOwner = await $ReadContracts.TokenVendor.owner();
 	}
 
 	async function buy() {
@@ -89,9 +84,7 @@
 	}
 
 	async function getAllEth() {
-		let contractBalance = await ReadEvmStores.$provider.getBalance(
-			ReadEvmStores.$contracts.TokenVendor.address
-		);
+		let contractBalance = await $ReadProvider.getBalance($ReadContracts.TokenVendor.address);
 
 		amountToWithdraw = ethers.utils.formatEther(contractBalance);
 	}

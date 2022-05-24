@@ -70,11 +70,11 @@ Configure the .env:
 ```shell
 cp .env.example .env
 ```
-> `TEST_WALLET_ADDRESS` can be configured with a specific wallet address that should be funded and used as deployer with the hardhat networks
+> `TEST_WALLET_ADDRESS` can be configured with a specific wallet address that should be automatically funded on deployment
 
 > `DEPLOYER_PRIVATE_KEY` can be configured with a private key that should be used for contract deployments on test networks and mainnets
 
-> Get your [Alchemy](https://alchemy.com/?r=zMxODI2NjkzNDM0M) and/or [POKT](https://mainnet.portal.pokt.network/#/signup) API keys
+> Get and set the [Alchemy](https://alchemy.com/?r=zMxODI2NjkzNDM0M) and/or [POKT](https://mainnet.portal.pokt.network/#/signup) API keys for testnet & mainnet deployments
 
 Run your tests and see the [gas usage](https://github.com/cgewecke/hardhat-gas-reporter):
 ```shell
@@ -218,13 +218,27 @@ let showMessage = false;
 
 ## Stores
 
-Evm Store
+Read-only Evm Store
 > Visit the [svelte-ethers-store documentation](https://gitlab.com/clb1/svelte-ethers-store) for more information about available default evm stores
 ```Javascript
-import { ReadEvmStores } from '$lib/stores/evm';
+import { 
+    ReadEvmStores, 
+    ReadConnected, 
+    ReadProvider, 
+    ReadChainId, 
+    ReadContracts, 
+    ReadChainData 
+} from '$lib/stores/evm';
 
-/// ReadEvmStores get initialized on page load for the selected network
-/// Allows reading of contract data without a wallet connection
+// ReadEvmStores get initialized on page load for the selected network
+// Subscription to read-only provider Stores (without wallet connection)
+$: readConnected = $ReadConnected;
+$: readProvider = $ReadProvider;
+$: readChainId = $ReadChainId;
+$: readContracts = $ReadContracts;
+$: readChainData = $ReadChainData;
+
+// Getting the value in Svelte or JavaScript Files
 const isConnected = ReadEvmStores.$connected;
 ```
 

@@ -1,8 +1,7 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import { contracts } from 'svelte-ethers-store';
-
-	import { ReadEvmStores, ProviderConnected } from '$lib/stores';
+	import { ReadConnected, ReadContracts } from '$lib/stores/evm';
 
 	import Address from '$lib/generic/address.svelte';
 	import Contract from '$lib/generic/contract.svelte';
@@ -10,13 +9,13 @@
 </script>
 
 <div class="contracts" in:fade={{ duration: 400 }}>
-	{#if $ProviderConnected}
+	{#if $ReadConnected}
 		<div class="panel-container" in:fade={{ duration: 400 }}>
-			{#each Object.entries(ReadEvmStores.$contracts) as [name, contract] (name)}
+			{#each Object.entries($ReadContracts) as [name, contract] (name)}
 				<Panel {name}>
 					<Address slot="header" value={contract.address} />
 					<Contract
-						readContract={ReadEvmStores.$contracts[name]}
+						readContract={$ReadContracts[name]}
 						writeContract={$contracts[name]} />
 				</Panel>
 			{/each}

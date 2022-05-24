@@ -1,29 +1,17 @@
-import { derived } from 'svelte/store';
 import { makeEvmStores } from 'svelte-ethers-store';
 
 import { ContractsABI } from '$lib/common/constants';
 import { Settings } from '$lib/stores/settings';
 
-//Evm store connected to read-only providers
+// Evm store connected to read-only provider
 export const ReadEvmStores = makeEvmStores('read');
 
-export const ProviderConnected = derived(
-	[ReadEvmStores.connected, ReadEvmStores.chainId, ReadEvmStores.contracts],
-	async ([$connected, $chainId, $contracts], set) => {
-		let value =
-			$connected === true &&
-			$chainId > 0 &&
-			Object.keys($contracts).length ==
-				Object.keys(ContractsABI[$chainId][0].contracts).length;
-
-		set(value);
-	},
-	false
-);
-
-export function contractsDeployed(chainId) {
-	return ContractsABI[chainId] !== undefined;
-}
+// ReadEvmStore's derived stores that can be directly subscribed to
+export const ReadConnected = ReadEvmStores.connected;
+export const ReadProvider = ReadEvmStores.provider;
+export const ReadChainId = ReadEvmStores.chainId;
+export const ReadContracts = ReadEvmStores.contracts;
+export const ReadChainData = ReadEvmStores.chainData;
 
 export function chainSupported(chainId, settings) {
 	settings = settings ?? get(Settings);
@@ -44,6 +32,10 @@ export function getAvailableNetworks(settings) {
 			)) ||
 		[]
 	);
+}
+
+export function contractsDeployed(chainId) {
+	return ContractsABI[chainId] !== undefined;
 }
 
 export async function loadAppContracts(evmStores, chainId, signerIfAvailable = true) {
